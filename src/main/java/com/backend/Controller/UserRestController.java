@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,14 +16,24 @@ import com.backend.Entity.User;
 import com.backend.Service.UserService;
 
 @RestController
+
+@CrossOrigin(origins="*")
 @RequestMapping(value="/user")
 public class UserRestController {
 
-	// Brings in UserService bean to class
+	
+	
+	
+
  @Autowired
  UserService userService;
 
  // Configures my endpoint, /signup in the end url, accepts JSON data, Produces JSON data, accessed with a post
+ 
+ 
+ 
+ 
+ 
  @RequestMapping(
  		value = "/signUp",
  		consumes = MediaType.APPLICATION_JSON_VALUE,
