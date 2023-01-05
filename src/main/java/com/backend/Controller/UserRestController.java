@@ -102,5 +102,54 @@ public class UserRestController {
          return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
      }
  }
+ 
+ @RequestMapping(
+	        value="/update",
+	        consumes = MediaType.APPLICATION_JSON_VALUE,
+	        produces = MediaType.APPLICATION_JSON_VALUE,
+	        method = RequestMethod.POST
+	    )
+	    public ResponseEntity<Object> updateUser(@RequestBody User user) {
+
+	        try {
+
+	            User updatedUser = userService.updateUser(user);
+	            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+	        
+	        } catch(Exception e) {
+	            System.out.println(e.getMessage());
+	            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	        } catch(Error e) {
+	            System.out.println(e.getMessage());
+	            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+	        }
+
+	    }
+ 
+ 
+ @RequestMapping(
+    value="/deleteUserById/{userId}",
+    produces = MediaType.APPLICATION_JSON_VALUE,
+    method = RequestMethod.DELETE
+)
+public ResponseEntity<Object> deleteById(@PathVariable Integer userId) {
+
+    try {
+
+        userService.deleteUserById(userId);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+    } catch(Exception e) {
+        System.out.println(e.getMessage());
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    } catch(Error e) {
+        System.out.println(e.getMessage());
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+
 
 }
+
+
