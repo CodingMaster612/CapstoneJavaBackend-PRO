@@ -2,12 +2,14 @@ package com.backend.Entity;
 
 import java.util.List;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 // Annotate Objects with Entity, lets project know its a Object from the DB
@@ -32,64 +34,80 @@ public class User {
     @Column(name="password", nullable = false)
 	String password;
     
-    
+    @OneToMany
+    @JoinColumn(name="Currency_id", referencedColumnName = "id")
+     List<Currency> BoughtCurrency;
     
 	
 	public User() {
 		super();
 	}
 
-	public User(Integer id, String email, String username, String password) {
-        super();
-        this.id = id;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-    }
 
-
-
-    public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
+	public User(Integer id, String email, String username, String password, List<Currency> boughtCurrency) {
+		super();
+		this.id = id;
 		this.email = email;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
 		this.password = password;
+		BoughtCurrency = boughtCurrency;
 	}
 
-	
-
-	
-
-	
 
 	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public List<Currency> getBoughtCurrency() {
+		return BoughtCurrency;
+	}
+
+
+	public void setBoughtCurrency(List<Currency> boughtCurrency) {
+		BoughtCurrency = boughtCurrency;
+	}
+
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", username=" + username + ", password=" + password + "]";
+		return "User [id=" + id + ", email=" + email + ", username=" + username + ", password=" + password
+				+ ", BoughtCurrency=" + BoughtCurrency + "]";
 	}
 
 	
