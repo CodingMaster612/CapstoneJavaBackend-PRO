@@ -1,0 +1,21 @@
+package com.backend.Service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.backend.Entity.Cart;
+import com.backend.Entity.Currency;
+import com.backend.Entity.User;
+import com.backend.Repo.CartRepo;
+
+@Service
+public class CartService {
+	
+	@Autowired
+    CartRepo cartRepo;
+	public Cart save(Cart cart) {
+		
+	    return cartRepo.save(cart);
+	}
+	
+}
