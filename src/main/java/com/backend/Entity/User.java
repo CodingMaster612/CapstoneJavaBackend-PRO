@@ -34,59 +34,82 @@ public class User {
     @Column(name="password", nullable = false)
 	String password;
     
-//    @OneToMany
-//    @JoinColumn(name="Currency_id", referencedColumnName = "id")
-//     List<Currency> BoughtCurrency;
+   @OneToMany
+   @JoinColumn(name="Currency_id", referencedColumnName = "id")
+   List<Currency> BoughtCurrency;
     
 	
 	public User() {
 		super();
 	}
 
-public User(Integer id, String email, String username, String password) {
-	super();
-	this.id = id;
-	this.email = email;
-	this.username = username;
-	this.password = password;
-}
 
-public Integer getId() {
-	return id;
-}
+	public User(Integer id, String email, String username, String password, List<Currency> boughtCurrency) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		BoughtCurrency = boughtCurrency;
+	}
 
-public void setId(Integer id) {
-	this.id = id;
-}
 
-public String getEmail() {
-	return email;
-}
+	public Integer getId() {
+		return id;
+	}
 
-public void setEmail(String email) {
-	this.email = email;
-}
 
-public String getUsername() {
-	return username;
-}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-public void setUsername(String username) {
-	this.username = username;
-}
 
-public String getPassword() {
-	return password;
-}
+	public String getEmail() {
+		return email;
+	}
 
-public void setPassword(String password) {
-	this.password = password;
-}
 
-@Override
-public String toString() {
-	return "User [id=" + id + ", email=" + email + ", username=" + username + ", password=" + password + "]";
-}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public List<Currency> getBoughtCurrency() {
+		return BoughtCurrency;
+	}
+
+
+	public void setBoughtCurrency(List<Currency> boughtCurrency) {
+		BoughtCurrency = boughtCurrency;
+	}
+
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", username=" + username + ", password=" + password
+				+ ", BoughtCurrency=" + BoughtCurrency + "]";
+	}
+
 
 
 	

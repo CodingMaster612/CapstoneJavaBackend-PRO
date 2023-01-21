@@ -27,21 +27,12 @@ public class CurrencyService {
     }
     
     
-    public Currency findCurrencyById(Integer amountId) {
-		return currencyRepo.findById(amountId).get();
+    public Currency findCurrencyById(Integer currencyId) {
+		return currencyRepo.findById(currencyId).get();
 	}
     
 	
-   public String buyCurrency(User user ,String currency, Integer amount) {
-	   Currency purchase = new Currency();
-	   purchase.setUser(user);
-	   purchase.setCurrency(currency);
-	   purchase.setAmount(amount);
-	   
-	   currencyRepo.save(purchase);
-	   return "bought" + amount + " of" + currency;
-   }
-    
+
     
     
 }

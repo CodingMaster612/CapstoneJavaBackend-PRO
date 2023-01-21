@@ -6,6 +6,7 @@ package com.backend.Controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.Entity.Currency;
+import com.backend.Entity.User;
 import com.backend.Service.CurrencyService;
 
 
@@ -61,35 +63,7 @@ public class CurrencyRestController {
  
 }
  
- @RequestMapping(
-         value="/buyCurrency",
-         
-        consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE,
-        
-         method = RequestMethod.POST
-     )                                 
-     public ResponseEntity<Object> buyCurrency(@RequestBody Currency request) {
-
-         try {
-
-             String currency = request.getCurrency();
-             Integer amount = request.getAmount();
-             
-             String message = currencyService.buyCurrency(null, currency, amount);
-             
-
-             return new ResponseEntity<>(message, HttpStatus.OK);
-
-         } catch(Exception e) {
-             System.out.println(e.getMessage());
-             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-         } catch(Error e) {
-             System.out.println(e.getMessage());
-             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-         }
  
-}
  
 
  

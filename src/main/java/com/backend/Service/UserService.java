@@ -85,16 +85,14 @@ public class UserService {
         userRepo.deleteById(id);
         
     }
+	public User buyCurrency(Integer userId, Integer currencyId) {
+		 User loggedInUser = findUserById(userId);
+	      Currency currency = currencyService.findCurrencyById(currencyId);
 
-//	public User buyCurrency(Integer userId, Integer cart) {
-//		 User loggedInUser = findUserById(userId);
-//
-//	      Currency currency = currencyService.findCurrencyById(cart);
-//
-//	        loggedInUser.getBoughtCurrency().add(currency);
-//
-//	        return save(loggedInUser);
-//	}
+        loggedInUser.getBoughtCurrency().add(currency);
+
+	        return save(loggedInUser);
+	}
 	public User findUserById(Integer UserId) {
         return userRepo.findById(UserId).get();
     }

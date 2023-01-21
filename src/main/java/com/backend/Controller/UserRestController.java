@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.backend.Entity.Currency;
 import com.backend.Entity.User;
 import com.backend.Service.UserService;
 
@@ -149,6 +149,33 @@ public ResponseEntity<Object> deleteById(@PathVariable Integer userId) {
         System.out.println(e.getMessage());
         return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+}
+ 
+ @RequestMapping(
+         value="/buy/{userId}/{currencyId}",
+         
+        consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE,
+        
+         method = RequestMethod.POST
+     )                                 
+     public ResponseEntity<Object> buyCurrency(@RequestBody User user, @PathVariable Integer userId, @PathVariable Integer currencyId) {
+
+         try {
+
+             User  buy = userService.buyCurrency(userId, currencyId);
+            
+
+             return new ResponseEntity<>(buy, HttpStatus.OK);
+
+         } catch(Exception e) {
+             System.out.println(e.getMessage());
+             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+         } catch(Error e) {
+             System.out.println(e.getMessage());
+             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+         }
+ 
 }
 
 
