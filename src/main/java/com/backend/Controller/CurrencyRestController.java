@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,6 +50,36 @@ public class CurrencyRestController {
              List<Currency> getCurrency = currencyService.viewAllCurrency();
 
              return new ResponseEntity<>(getCurrency, HttpStatus.OK);
+
+         } catch(Exception e) {
+             System.out.println(e.getMessage());
+             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+         } catch(Error e) {
+             System.out.println(e.getMessage());
+             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+         }
+ 
+}
+ 
+ @RequestMapping(
+         value="/buyCurrency",
+         
+        consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE,
+        
+         method = RequestMethod.POST
+     )                                 
+     public ResponseEntity<Object> buyCurrency(@RequestBody Currency request) {
+
+         try {
+
+             String currency = request.getCurrency();
+             Integer amount = request.getAmount();
+             
+             String message = currencyService.buyCurrency(null, currency, amount);
+             
+
+             return new ResponseEntity<>(message, HttpStatus.OK);
 
          } catch(Exception e) {
              System.out.println(e.getMessage());

@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -30,21 +31,27 @@ public class Currency {
 	
 	
 	
-	@Column(name="currency")
-	Integer currency;
 	
-	
-	@Column(name="cost")
-	 Integer cost;
 	
 	
 	@Column(name="images")
-	 String image;
+	 private String image;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	
+	 private User user;
 	
 	
 	
+	private Integer amount;
 	
 	
+	 private String currency;
+	
+	
+	 
 
 
 	public Currency() {
@@ -56,17 +63,14 @@ public class Currency {
 
 
 
-
-
-	public Currency(Integer id, Integer currency, Integer cost, String image) {
+	public Currency(Integer id, String image, User user, Integer amount, String currency) {
 		super();
 		this.id = id;
-		this.currency = currency;
-		this.cost = cost;
 		this.image = image;
+		this.user = user;
+		this.amount = amount;
+		this.currency = currency;
 	}
-
-
 
 
 
@@ -80,53 +84,9 @@ public class Currency {
 
 
 
-
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-
-
-
-
-
-
-	public Integer getCurrency() {
-		return currency;
-	}
-
-
-
-
-
-
-
-	public void setCurrency(Integer currency) {
-		this.currency = currency;
-	}
-
-
-
-
-
-
-
-	public Integer getCost() {
-		return cost;
-	}
-
-
-
-
-
-
-
-	public void setCost(Integer cost) {
-		this.cost = cost;
-	}
-
-
 
 
 
@@ -140,8 +100,6 @@ public class Currency {
 
 
 
-
-
 	public void setImage(String image) {
 		this.image = image;
 	}
@@ -150,12 +108,89 @@ public class Currency {
 
 
 
+	public User getUser() {
+		return user;
+	}
+
+
+
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+
+
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+
+
+
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+
+
+
+
+
+	public String getCurrency() {
+		return currency;
+	}
+
+
+
+
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
+
+
 
 
 	@Override
 	public String toString() {
-		return "Currency [id=" + id + ", currency=" + currency + ", cost=" + cost + ", image=" + image + "]";
+		return "Currency [id=" + id + ", image=" + image + ", user=" + user + ", amount=" + amount + ", currency="
+				+ currency + "]";
 	}
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+	
 
 
 
