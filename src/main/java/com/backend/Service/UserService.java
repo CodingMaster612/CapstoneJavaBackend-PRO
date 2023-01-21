@@ -5,9 +5,11 @@ import java.util.List;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.backend.Entity.Cart;
 import com.backend.Entity.Currency;
 
 import com.backend.Entity.User;
@@ -85,14 +87,17 @@ public class UserService {
         userRepo.deleteById(id);
         
     }
-	public User buyCurrency(Integer userId, Integer currencyId) {
-		 User loggedInUser = findUserById(userId);
-	      Currency currency = currencyService.findCurrencyById(currencyId);
+    public User buyCurrency(Integer userId, Integer cartId) {
+
+        User loggedInUser = findUserById(userId);
+
+       Cart currency = currencyService.findCartById(cartId);
 
         loggedInUser.getBoughtCurrency().add(currency);
 
-	        return save(loggedInUser);
-	}
+        return save(loggedInUser);
+    }
+
 	public User findUserById(Integer UserId) {
         return userRepo.findById(UserId).get();
     }

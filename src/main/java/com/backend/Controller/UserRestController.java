@@ -2,6 +2,7 @@ package com.backend.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.Entity.Currency;
+
 import com.backend.Entity.User;
 import com.backend.Service.UserService;
 
@@ -151,32 +153,33 @@ public ResponseEntity<Object> deleteById(@PathVariable Integer userId) {
     }
 }
  
- @RequestMapping(
-         value="/buy/{userId}/{currencyId}",
-         
-        consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE,
-        
+ @RequestMapping(value = "/purchase/{cartId}/{userId}",
+         consumes = MediaType.APPLICATION_JSON_VALUE,
+         produces = MediaType.APPLICATION_JSON_VALUE,
          method = RequestMethod.POST
-     )                                 
-     public ResponseEntity<Object> buyCurrency(@RequestBody User user, @PathVariable Integer userId, @PathVariable Integer currencyId) {
+         )
+ public ResponseEntity<Object> purchaseCurrency(@RequestBody Currency currency , @PathVariable Integer cartId , @PathVariable Integer userId) {
 
-         try {
-
-             User  buy = userService.buyCurrency(userId, currencyId);
-            
-
-             return new ResponseEntity<>(buy, HttpStatus.OK);
-
-         } catch(Exception e) {
-             System.out.println(e.getMessage());
-             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-         } catch(Error e) {
-             System.out.println(e.getMessage());
-             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+     try {
+         
+    	 User purchase = userService.buyCurrency(userId, cartId);
+    	 
+         
+         if(purchase == null) {
+             
+             throw new Error("Invalid purchase");
+             
          }
  
-}
+         return new ResponseEntity<>(purchase, HttpStatus.OK);
+         
+     } catch(Exception e) {
+         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+     } catch(Error e) {
+         return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+     }
+ }
+		 
 
 
 }

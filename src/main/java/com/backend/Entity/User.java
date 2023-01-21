@@ -36,7 +36,7 @@ public class User {
     
    @OneToMany
    @JoinColumn(name="Currency_id", referencedColumnName = "id")
-   List<Currency> BoughtCurrency;
+   List<Cart> BoughtCurrency;
     
 	
 	public User() {
@@ -44,7 +44,7 @@ public class User {
 	}
 
 
-	public User(Integer id, String email, String username, String password, List<Currency> boughtCurrency) {
+	public User(Integer id, String email, String username, String password, List<Cart> boughtCurrency) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -94,12 +94,12 @@ public class User {
 	}
 
 
-	public List<Currency> getBoughtCurrency() {
+	public List<Cart> getBoughtCurrency() {
 		return BoughtCurrency;
 	}
 
 
-	public void setBoughtCurrency(List<Currency> boughtCurrency) {
+	public void setBoughtCurrency(List<Cart> boughtCurrency) {
 		BoughtCurrency = boughtCurrency;
 	}
 
