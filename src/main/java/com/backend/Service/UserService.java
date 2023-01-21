@@ -4,8 +4,11 @@ package com.backend.Service;
 import java.util.List;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.backend.Entity.Currency;
 
 import com.backend.Entity.User;
 import com.backend.Repo.UserRepo;
@@ -21,7 +24,8 @@ public class UserService {
     @Autowired
     UserRepo userRepo;
 	
-    
+    @Autowired
+    CurrencyService currencyService;
     
 	public List<User> getAll() {
 		
@@ -81,6 +85,18 @@ public class UserService {
         userRepo.deleteById(id);
         
     }
-	
+
+	public User buyCurrency(Integer currencyId, Integer amountId) {
+		 User loggedInUser = findUserById(currencyId);
+
+	      Currency currency = currencyService.findCurrencyById(amountId);
+
+	        loggedInUser.getBoughtCurrency().add(currency);
+
+	        return save(loggedInUser);
+	}
+	public User findUserById(Integer UserId) {
+        return userRepo.findById(UserId).get();
+    }
 
 }
