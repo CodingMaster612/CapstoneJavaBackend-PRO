@@ -159,11 +159,12 @@ public ResponseEntity<Object> deleteById(@PathVariable Integer userId) {
          produces = MediaType.APPLICATION_JSON_VALUE,
          method = RequestMethod.POST
          )
- public ResponseEntity<Object> purchaseCartItems(@RequestBody Cart cart , @PathVariable Integer cartId ) {
+ public ResponseEntity<Object> purchaseCartItems(@RequestBody User user , @PathVariable Integer cartId ) {
 
      try {
-         
-    	 User purchase = userService.buyCurrency(cartId);
+    	 Integer userId = user.getId();
+    	 
+    	 User purchase = userService.buyCurrency(userId,cartId);
     	 
          
          if(purchase == null) {

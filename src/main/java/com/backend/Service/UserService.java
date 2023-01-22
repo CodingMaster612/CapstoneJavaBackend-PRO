@@ -98,8 +98,8 @@ public class UserService {
         return save(loggedInUser);
     }
 
-	public User findUserById(Integer UserId) {
-        return userRepo.findById(UserId).get();
+	public User findUserById(Integer userId) {
+        return userRepo.findById(userId).get();
     }
 
 }
