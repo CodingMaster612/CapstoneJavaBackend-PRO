@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.Entity.Cart;
 import com.backend.Entity.Currency;
 
 import com.backend.Entity.User;
@@ -153,16 +154,16 @@ public ResponseEntity<Object> deleteById(@PathVariable Integer userId) {
     }
 }
  
- @RequestMapping(value = "/purchase/{cartId}/{userId}",
+ @RequestMapping(value = "/purchase/{cartId}",
          consumes = MediaType.APPLICATION_JSON_VALUE,
          produces = MediaType.APPLICATION_JSON_VALUE,
          method = RequestMethod.POST
          )
- public ResponseEntity<Object> purchaseCurrency(@RequestBody Currency currency , @PathVariable Integer cartId , @PathVariable Integer userId) {
+ public ResponseEntity<Object> purchaseCartItems(@RequestBody Cart cart , @PathVariable Integer cartId ) {
 
      try {
          
-    	 User purchase = userService.buyCurrency(userId, cartId);
+    	 User purchase = userService.buyCurrency(cartId);
     	 
          
          if(purchase == null) {

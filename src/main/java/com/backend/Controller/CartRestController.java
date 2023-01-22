@@ -52,4 +52,30 @@ public class CartRestController {
 	         }
 	 
 	}
+	 
+	 @RequestMapping(
+	         value="/viewAllCart",
+	         
+	         produces = MediaType.APPLICATION_JSON_VALUE,
+	        
+	         method = RequestMethod.GET
+	     )                                 
+	     public ResponseEntity<Object> viewAllCart() {
+
+	         try {
+
+	             
+	             List<Cart> getCart = cartService.viewAllCart();
+
+	             return new ResponseEntity<>(getCart, HttpStatus.OK);
+
+	         } catch(Exception e) {
+	             System.out.println(e.getMessage());
+	             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	         } catch(Error e) {
+	             System.out.println(e.getMessage());
+	             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+	         }
+	 
+	}
 }
