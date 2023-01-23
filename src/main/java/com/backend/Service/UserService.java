@@ -101,5 +101,22 @@ public class UserService {
 	public User findUserById(Integer userId) {
         return userRepo.findById(userId).get();
     }
+	
+	public User buyCurrencyTest(Integer userId, Integer itemId) {
+
+        User loggedInUser = findUserById(userId);
+
+       Cart currency = currencyService.findCartById(itemId);
+
+        loggedInUser.getBoughtCurrency().add(currency);
+
+        return save(loggedInUser);
+    }
+	
+	public User findByCartId(Integer cartId) {
+
+        return userRepo.findById(cartId).get();
+
+    }
 
 }

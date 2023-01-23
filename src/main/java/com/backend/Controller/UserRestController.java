@@ -1,5 +1,7 @@
 package com.backend.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -18,6 +20,7 @@ import com.backend.Entity.Cart;
 import com.backend.Entity.Currency;
 
 import com.backend.Entity.User;
+import com.backend.Service.CurrencyService;
 import com.backend.Service.UserService;
 
 @RestController
@@ -34,7 +37,8 @@ public class UserRestController {
  UserService userService;
 
  // Configures my endpoint, /signup in the end url, accepts JSON data, Produces JSON data, accessed with a post
- 
+ @Autowired
+ CurrencyService currencyService;
  
  
  
@@ -181,7 +185,61 @@ public ResponseEntity<Object> deleteById(@PathVariable Integer userId) {
          return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
      }
  }
-		 
+ 
+ @RequestMapping(
+         value="/getCartId/{cartId}",
+         
+         produces = MediaType.APPLICATION_JSON_VALUE,
+        
+         method = RequestMethod.GET
+     )                                 
+     public ResponseEntity<Object> getCartId(@PathVariable Integer cartId) {
+
+         try {
+
+             
+        	 Cart cart = currencyService.findCartById(cartId);
+
+             return new ResponseEntity<>(cart, HttpStatus.OK);
+
+         } catch(Exception e) {
+             System.out.println(e.getMessage());
+             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+         } catch(Error e) {
+             System.out.println(e.getMessage());
+             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+         }
+ 
+}
+ 
+ //get ammping for Find CArt id 
+ @RequestMapping(value = "/purchaseTest/{itemId}/{userId}",
+         consumes = MediaType.APPLICATION_JSON_VALUE,
+         produces = MediaType.APPLICATION_JSON_VALUE,
+         method = RequestMethod.POST
+         )
+ public ResponseEntity<Object> purchaseCartItemsTest(@RequestBody User user , @PathVariable Integer itemId  , @PathVariable Integer userId) {
+
+     try {
+    	 
+    	 
+    	 User purchase = userService.buyCurrencyTest(itemId, userId);
+    	 
+         
+         if(purchase == null) {
+             
+             throw new Error("Invalid purchase");
+             
+         }
+ 
+         return new ResponseEntity<>(purchase, HttpStatus.OK);
+         
+     } catch(Exception e) {
+         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+     } catch(Error e) {
+         return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+     }
+ }
 
 
 }
