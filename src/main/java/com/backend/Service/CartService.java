@@ -24,5 +24,9 @@ public class CartService {
 	public List<Cart> viewAllCart() {
         return cartRepo.findAll();
     }
+
+
+	
+	
 	
 }

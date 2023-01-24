@@ -2,6 +2,7 @@ package com.backend.Controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -20,6 +21,9 @@ import com.backend.Entity.Cart;
 import com.backend.Entity.Currency;
 
 import com.backend.Entity.User;
+import com.backend.Repo.CartRepo;
+import com.backend.Repo.UserRepo;
+import com.backend.Service.CartService;
 import com.backend.Service.CurrencyService;
 import com.backend.Service.UserService;
 
@@ -41,7 +45,11 @@ public class UserRestController {
  CurrencyService currencyService;
  
  
+ @Autowired
+ CartService cartService;
  
+ @Autowired 
+ CartRepo cartRepo;
  
  @RequestMapping(
  		value = "/signUp",
@@ -185,45 +193,48 @@ public ResponseEntity<Object> deleteById(@PathVariable Integer userId) {
          return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
      }
  }
- 
- @RequestMapping(
-         value="/getCartId/{cartId}",
-         
+ @RequestMapping(value = "/getPurchasedCart",
+         consumes = MediaType.APPLICATION_JSON_VALUE,
          produces = MediaType.APPLICATION_JSON_VALUE,
-        
          method = RequestMethod.GET
-     )                                 
-     public ResponseEntity<Object> getCartId(@PathVariable Integer cartId) {
+         )
+ public ResponseEntity<Object> getPurchasedCart(@PathVariable Integer PurchasedId) {
 
-         try {
-
+     try {
+    	 
+    	 List<Cart> purchased = userService.findById(PurchasedId).getBoughtCurrency();
+    	 
+    	 //user id pathravbled find by id findbid(userId).getCart
+    			
+         
+         if(purchased == null) {
              
-        	 Cart cart = currencyService.findCartById(cartId);
-
-             return new ResponseEntity<>(cart, HttpStatus.OK);
-
-         } catch(Exception e) {
-             System.out.println(e.getMessage());
-             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-         } catch(Error e) {
-             System.out.println(e.getMessage());
-             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+             throw new Error("Invalid purchase");
+             
          }
  
-}
+         return new ResponseEntity<>(purchased, HttpStatus.OK);
+         
+     } catch(Exception e) {
+         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+     } catch(Error e) {
+         return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+     }
+ }
  
- //get ammping for Find CArt id 
- @RequestMapping(value = "/purchaseTest/{itemId}/{userId}",
+ 
+ 
+ @RequestMapping(value = "/purchaseCart/{cartId}/{userId}",
          consumes = MediaType.APPLICATION_JSON_VALUE,
          produces = MediaType.APPLICATION_JSON_VALUE,
          method = RequestMethod.POST
          )
- public ResponseEntity<Object> purchaseCartItemsTest(@RequestBody User user , @PathVariable Integer itemId  , @PathVariable Integer userId) {
+ public ResponseEntity<Object> purchaseCurrencyFromCart(@RequestBody User user , @PathVariable Integer cartId  , @PathVariable Integer userId) {
 
      try {
     	 
     	 
-    	 User purchase = userService.buyCurrencyTest(itemId, userId);
+    	 User purchase = userService.buyCurrencyFromCart(cartId, userId);
     	 
          
          if(purchase == null) {
