@@ -120,9 +120,9 @@ public class UserService {
     }
 
 	
-	public User findById(Integer PurchasedId) {
+	public User findById(Integer Id) {
 
-        return userRepo.findById(PurchasedId).get();
+        return userRepo.findById(Id).get();
 
     }
 	

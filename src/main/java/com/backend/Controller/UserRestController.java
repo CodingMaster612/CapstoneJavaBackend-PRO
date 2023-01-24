@@ -193,16 +193,16 @@ public ResponseEntity<Object> deleteById(@PathVariable Integer userId) {
          return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
      }
  }
- @RequestMapping(value = "/getPurchasedCart",
+ @RequestMapping(value = "/getItemsInCart/{Id}",
          consumes = MediaType.APPLICATION_JSON_VALUE,
          produces = MediaType.APPLICATION_JSON_VALUE,
          method = RequestMethod.GET
          )
- public ResponseEntity<Object> getPurchasedCart(@PathVariable Integer PurchasedId) {
+ public ResponseEntity<Object> getPurchasedCart(@PathVariable Integer Id) {
 
      try {
     	 
-    	 List<Cart> purchased = userService.findById(PurchasedId).getBoughtCurrency();
+    	 User purchased = userService.findById(Id);
     	 
     	 //user id pathravbled find by id findbid(userId).getCart
     			
