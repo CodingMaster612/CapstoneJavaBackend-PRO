@@ -126,5 +126,8 @@ public class UserService {
 
     }
 	
+	public User getById(Integer Id) {
+		return userRepo.findById(Id).get();
+	}
 
 }

@@ -193,27 +193,26 @@ public ResponseEntity<Object> deleteById(@PathVariable Integer userId) {
          return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
      }
  }
- @RequestMapping(value = "/getItemsInCart/{Id}",
+ @RequestMapping(value = "/postItemsInCart/{Id}",
          consumes = MediaType.APPLICATION_JSON_VALUE,
          produces = MediaType.APPLICATION_JSON_VALUE,
-         method = RequestMethod.GET
+         method = RequestMethod.POST
          )
- public ResponseEntity<Object> getPurchasedCart(@PathVariable Integer Id) {
+ public ResponseEntity<Object> postCart(@PathVariable Integer Id) {
 
      try {
     	 
-    	 User purchased = userService.findById(Id);
+    	 User postCurrency = userService.findById(Id);
     	 
-    	 //user id pathravbled find by id findbid(userId).getCart
     			
          
-         if(purchased == null) {
+         if(postCurrency == null) {
              
-             throw new Error("Invalid purchase");
+             throw new Error("Invalid");
              
          }
  
-         return new ResponseEntity<>(purchased, HttpStatus.OK);
+         return new ResponseEntity<>(postCurrency, HttpStatus.OK);
          
      } catch(Exception e) {
          return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -222,7 +221,32 @@ public ResponseEntity<Object> deleteById(@PathVariable Integer userId) {
      }
  }
  
+ @RequestMapping(value = "/getItemsInCart/{Id}",
+         produces = MediaType.APPLICATION_JSON_VALUE,
+         method = RequestMethod.GET
+         )
+ public ResponseEntity<Object> getCart(@PathVariable Integer Id) {
+
+     try {
+    	 
+    	 User getCurrency = userService.getById(Id);
+    	 
+    			
+         
+         if(getCurrency == null) {
+             
+             throw new Error("Invalid ");
+             
+         }
  
+         return new ResponseEntity<>(getCurrency, HttpStatus.OK);
+         
+     } catch(Exception e) {
+         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+     } catch(Error e) {
+         return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+     }
+ }
  
  @RequestMapping(value = "/purchaseCart/{cartId}/{userId}",
          consumes = MediaType.APPLICATION_JSON_VALUE,
