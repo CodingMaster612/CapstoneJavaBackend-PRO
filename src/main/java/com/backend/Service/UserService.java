@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.backend.Entity.Cart;
+import com.backend.Entity.CreditCard;
 import com.backend.Entity.Currency;
 
 import com.backend.Entity.User;
@@ -27,7 +28,7 @@ public class UserService {
     UserRepo userRepo;
 	
     @Autowired
-    CurrencyService currencyService;
+    CreditCardService creditCardService;
     
 	public List<User> getAll() {
 		
@@ -87,31 +88,31 @@ public class UserService {
         userRepo.deleteById(id);
         
     }
-    public User buyCurrency(Integer userId, Integer cartId) {
-
-        User loggedInUser = findUserById(userId);
-
-       Cart currency = currencyService.findCartById(cartId);
-
-        loggedInUser.getBoughtCurrency().add(currency);
-
-        return save(loggedInUser);
-    }
-
-	public User findUserById(Integer userId) {
-        return userRepo.findById(userId).get();
-    }
-	
-	public User buyCurrencyFromCart(Integer userId, Integer cartId) {
-
-        User loggedInUser = findUserById(userId);
-
-       Cart currency = currencyService.findCartById(cartId);
-
-        loggedInUser.getBoughtCurrency().add(currency);
-
-        return save(loggedInUser);
-    }
+//    public User buyCurrency(Integer userId, Integer cartId) {
+//
+//        User loggedInUser = findUserById(userId);
+//
+//       Cart currency = currencyService.findCartById(cartId);
+//
+//        loggedInUser.getBoughtCurrency().add(currency);
+//
+//        return save(loggedInUser);
+//    }
+//
+//	public User findUserById(Integer userId) {
+//        return userRepo.findById(userId).get();
+//    }
+//	
+//	public User buyCurrencyFromCart(Integer userId, Integer cartId) {
+//
+//        User loggedInUser = findUserById(userId);
+//
+//       Cart currency = currencyService.findCartById(cartId);
+//
+//        loggedInUser.getBoughtCurrency().add(currency);
+//
+//        return save(loggedInUser);
+//    }
 	
 	public User findByCartId(Integer cartId) {
 
@@ -129,5 +130,16 @@ public class UserService {
 	public User getById(Integer Id) {
 		return userRepo.findById(Id).get();
 	}
+	
+	public User Transactions(Integer CreditCardId, Integer Id) {
+
+        User loggedInUser = getUserById(Id);
+
+       CreditCard creditcard = creditCardService.findCardById(CreditCardId);
+
+        loggedInUser.getTransations().add(creditcard);
+
+        return save(loggedInUser);
+    }
 
 }
