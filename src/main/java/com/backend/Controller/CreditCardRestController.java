@@ -62,7 +62,7 @@ public class CreditCardRestController {
 	 @RequestMapping(value = "/Transactions/{Id}",
 	         consumes = MediaType.APPLICATION_JSON_VALUE,
 	         produces = MediaType.APPLICATION_JSON_VALUE,
-	         method = RequestMethod.GET
+	         method = RequestMethod.POST
 	         )
 	 public ResponseEntity<Object> transactionsById(@RequestBody CreditCard creditcard, @PathVariable Integer Id ) {
 
@@ -108,4 +108,6 @@ public class CreditCardRestController {
 		        }
 
 		    }
+	 
+	 
 }
