@@ -62,7 +62,7 @@ public class CreditCardRestController {
 	 @RequestMapping(value = "/Transactions/{Id}",
 	         consumes = MediaType.APPLICATION_JSON_VALUE,
 	         produces = MediaType.APPLICATION_JSON_VALUE,
-	         method = RequestMethod.POST
+	         method = RequestMethod.GET
 	         )
 	 public ResponseEntity<Object> transactionsById(@RequestBody CreditCard creditcard, @PathVariable Integer Id ) {
 
@@ -87,5 +87,25 @@ public class CreditCardRestController {
 	     }
 	 }
 	 
-	 
+	 @RequestMapping(
+		        value="/getCardById/{cardId}",
+		        produces = MediaType.APPLICATION_JSON_VALUE,
+		        method = RequestMethod.GET
+		    )
+		    public ResponseEntity<Object> getCardById(@PathVariable Integer cardId) {
+
+		        try {
+
+		            CreditCard card = creditCardService.findCardById(cardId);
+		       
+		            return new ResponseEntity<>(card, HttpStatus.OK);
+		        } catch(Exception e) {
+		            System.out.println(e.getMessage());
+		            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		        } catch(Error e) {
+		            System.out.println(e.getMessage());
+		            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		        }
+
+		    }
 }
