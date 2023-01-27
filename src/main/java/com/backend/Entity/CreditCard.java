@@ -34,14 +34,20 @@ public class CreditCard {
 	
 	@Column(name="cardHolder")
 	private String holder;
+	
+	@Column(name="image")
+	private String image;
+	
 
 	public CreditCard() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	public CreditCard(Integer id, Integer firstNumbers, Integer secondNumbers, Integer thirdNumbers,
-			Integer fourthNumbers, String name, String holder) {
+			Integer fourthNumbers, String name, String holder, String image) {
 		super();
 		this.id = id;
 		this.firstNumbers = firstNumbers;
@@ -50,7 +56,10 @@ public class CreditCard {
 		this.fourthNumbers = fourthNumbers;
 		this.name = name;
 		this.holder = holder;
+		this.image = image;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -108,12 +117,28 @@ public class CreditCard {
 		this.holder = holder;
 	}
 
+
+
+	public String getImage() {
+		return image;
+	}
+
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "CreditCard [id=" + id + ", firstNumbers=" + firstNumbers + ", secondNumbers=" + secondNumbers
 				+ ", thirdNumbers=" + thirdNumbers + ", fourthNumbers=" + fourthNumbers + ", name=" + name + ", holder="
-				+ holder + "]";
+				+ holder + ", image=" + image + "]";
 	}
+
+	
 	
 	
 	
