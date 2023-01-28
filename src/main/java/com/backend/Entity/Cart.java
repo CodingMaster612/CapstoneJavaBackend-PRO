@@ -30,6 +30,8 @@ public class Cart {
 	@Column(name="amount")
 	Integer amount;
 
+	@Column(name="image")
+	String image;
 	
 	 
 	
@@ -41,11 +43,41 @@ public class Cart {
 
 
 
-	public Cart(Integer id, String currency, Integer amount) {
+	
+
+
+
+
+	public String getImage() {
+		return image;
+	}
+
+
+
+
+
+
+
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+
+
+
+
+
+
+
+
+	public Cart(Integer id, String currency, Integer amount, String image) {
 		super();
 		this.id = id;
 		this.currency = currency;
 		this.amount = amount;
+		this.image = image;
 	}
 
 
@@ -93,10 +125,20 @@ public class Cart {
 
 
 
+
+
+
+
+
 	@Override
 	public String toString() {
-		return "Cart [id=" + id + ", currency=" + currency + ", amount=" + amount + "]";
+		return "Cart [id=" + id + ", currency=" + currency + ", amount=" + amount + ", image=" + image + "]";
 	}
+
+
+
+
+	
 
 
 

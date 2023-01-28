@@ -30,6 +30,9 @@ public class UserService {
     @Autowired
     CreditCardService creditCardService;
     
+    @Autowired
+    CartService cartService;
+    
 	public List<User> getAll() {
 		
 	    return userRepo.findAll();
@@ -138,6 +141,16 @@ public class UserService {
        CreditCard creditcard = creditCardService.findCardById(CreditCardId);
 
         loggedInUser.getTransations().add(creditcard);
+
+        return save(loggedInUser);
+    }
+	public User CurrencyTransaction(Integer cartId, Integer Id) {
+
+        User loggedInUser = getUserById(Id);
+
+       Cart cart = cartService.findCartById(cartId);
+
+        loggedInUser.getBoughtCurrency().add(cart);
 
         return save(loggedInUser);
     }

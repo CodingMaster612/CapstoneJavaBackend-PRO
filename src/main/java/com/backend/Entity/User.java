@@ -37,6 +37,10 @@ public class User {
    @OneToMany
    @JoinColumn(name="Transactions_id", referencedColumnName = "id")
    List<CreditCard> Transations;
+   
+   @OneToMany
+   @JoinColumn(name="Bought_id", referencedColumnName = "id")
+   List<Cart> BoughtCurrency;
     
 	
 	public User() {
@@ -44,14 +48,38 @@ public class User {
 	}
 
 
-	public User(Integer id, String email, String username, String password, List<CreditCard> transations) {
+	
+
+
+	public List<Cart> getBoughtCurrency() {
+		return BoughtCurrency;
+	}
+
+
+
+
+
+	public void setBoughtCurrency(List<Cart> boughtCurrency) {
+		BoughtCurrency = boughtCurrency;
+	}
+
+
+
+
+
+	public User(Integer id, String email, String username, String password, List<CreditCard> transations,
+			List<Cart> boughtCurrency) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.username = username;
 		this.password = password;
 		Transations = transations;
+		BoughtCurrency = boughtCurrency;
 	}
+
+
+
 
 
 	public Integer getId() {
@@ -104,11 +132,17 @@ public class User {
 	}
 
 
+
+
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", username=" + username + ", password=" + password
-				+ ", Transations=" + Transations + "]";
+				+ ", Transations=" + Transations + ", BoughtCurrency=" + BoughtCurrency + "]";
 	}
+
+
+	
 
 
 

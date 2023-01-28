@@ -26,6 +26,19 @@ public class CartService {
     }
 
 
+	public Cart findCartById(Integer cartId) {
+
+        return cartRepo.findById(cartId).get();
+
+    }
+	
+	 public void deleteCartById(Integer id) {
+
+	        cartRepo.deleteById(id);
+	        
+	    }
+
+
 	
 	
 	
