@@ -34,6 +34,9 @@ public class User {
     @Column(name="password", nullable = false)
 	String password;
     
+    @Column (name="storedUrl")
+    String storedUrl;
+    
    @OneToMany
    @JoinColumn(name="Transactions_id", referencedColumnName = "id")
    List<CreditCard> Transations;
@@ -67,15 +70,38 @@ public class User {
 
 
 
-	public User(Integer id, String email, String username, String password, List<CreditCard> transations,
-			List<Cart> boughtCurrency) {
+	
+
+
+
+
+
+	public User(Integer id, String email, String username, String password, String storedUrl,
+			List<CreditCard> transations, List<Cart> boughtCurrency) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.username = username;
 		this.password = password;
+		this.storedUrl = storedUrl;
 		Transations = transations;
 		BoughtCurrency = boughtCurrency;
+	}
+
+
+
+
+
+	public String getStoredUrl() {
+		return storedUrl;
+	}
+
+
+
+
+
+	public void setStoredUrl(String storedUrl) {
+		this.storedUrl = storedUrl;
 	}
 
 
