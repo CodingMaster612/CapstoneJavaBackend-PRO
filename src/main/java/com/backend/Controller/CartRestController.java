@@ -157,20 +157,20 @@ public class CartRestController {
 			}
 	 
 	 @RequestMapping(
-	         value="/viewAllOwned",
+	         value="/viewAllOwned/{email}",
 	         
 	         produces = MediaType.APPLICATION_JSON_VALUE,
 	        
 	         method = RequestMethod.GET
 	     )                                 
-	     public ResponseEntity<Object> viewOwned() {
+	     public ResponseEntity<Object> viewOwned( @PathVariable String email) {
 
 	         try {
 
+	        	 List<Cart> BoughtCurrency = userService.getUserByEmail(email).getBoughtCurrency();
 	             
-	             List<Cart> getcart= cartService.viewAllCart();
 
-	             return new ResponseEntity<>(getcart, HttpStatus.OK);
+	             return new ResponseEntity<>(BoughtCurrency, HttpStatus.OK);
 
 	         } catch(Exception e) {
 	             System.out.println(e.getMessage());
