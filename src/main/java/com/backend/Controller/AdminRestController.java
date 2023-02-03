@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.Entity.Admin;
 import com.backend.Entity.User;
+import com.backend.Repo.UserRepo;
 import com.backend.Service.AdminService;
 import com.backend.Service.UserService;
 
@@ -27,6 +28,9 @@ public class AdminRestController {
 	
 	@Autowired 
 	UserService userService;
+	
+	@Autowired 
+	UserRepo userRepo;
 	
 	
 	
@@ -58,16 +62,18 @@ public class AdminRestController {
 	//admin delete user
 	
 	@RequestMapping(
-		    value="/deleteUserById/{userId}",
+		    value="/deleteUserById/{email}",
 		    produces = MediaType.APPLICATION_JSON_VALUE,
 		    method = RequestMethod.DELETE
 		)
-		public ResponseEntity<Object> AdminDeleteById(@PathVariable Integer userId) {
+		public ResponseEntity<Object> AdminDeleteById(@PathVariable String email) {
 
 		    try {
 
-		        userService.deleteUserById(userId);
-
+		    	User user = userService.findByEmail(email);
+		        if (user != null) {
+		            userRepo.delete(user);
+		        }
 		        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
 		    } catch(Exception e) {

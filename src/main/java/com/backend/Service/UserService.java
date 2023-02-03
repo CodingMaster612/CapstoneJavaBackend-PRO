@@ -154,5 +154,9 @@ public class UserService {
 
         return save(loggedInUser);
     }
+public User findByEmail(String email) {
+	return userRepo.getByEmail(email);
+}
+	
 
 }
