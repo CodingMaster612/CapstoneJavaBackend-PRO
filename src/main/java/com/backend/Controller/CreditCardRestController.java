@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.Entity.Cart;
 import com.backend.Entity.CreditCard;
 import com.backend.Entity.Currency;
 import com.backend.Entity.User;
@@ -108,6 +109,32 @@ public class CreditCardRestController {
 		        }
 
 		    }
+	 
+	 @RequestMapping(
+	         value="/viewOwnedCredit/{email}",
+	         
+	         produces = MediaType.APPLICATION_JSON_VALUE,
+	        
+	         method = RequestMethod.GET
+	     )                                 
+	     public ResponseEntity<Object> viewOwnedCredit( @PathVariable String email) {
+
+	         try {
+
+	        	 List<CreditCard> Transactions = userService.getUserByEmail(email).getTransations();
+	             
+
+	             return new ResponseEntity<>(Transactions, HttpStatus.OK);
+
+	         } catch(Exception e) {
+	             System.out.println(e.getMessage());
+	             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	         } catch(Error e) {
+	             System.out.println(e.getMessage());
+	             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+	         }
+	 
+	}
 	 
 	 
 }
