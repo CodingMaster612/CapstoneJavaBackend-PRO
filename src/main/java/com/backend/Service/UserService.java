@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.backend.Entity.Admin;
 import com.backend.Entity.Cart;
 import com.backend.Entity.CreditCard;
 import com.backend.Entity.Currency;
@@ -157,6 +158,8 @@ public class UserService {
 public User findByEmail(String email) {
 	return userRepo.getByEmail(email);
 }
-	
+
+
+
 
 }

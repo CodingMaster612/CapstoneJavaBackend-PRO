@@ -166,6 +166,32 @@ public ResponseEntity<Object> deleteById(@PathVariable Integer userId) {
     }
 }
  
+ @RequestMapping(value = "/updateSignIn",
+         consumes = MediaType.APPLICATION_JSON_VALUE,
+         produces = MediaType.APPLICATION_JSON_VALUE,
+         method = RequestMethod.POST
+         )
+ public ResponseEntity<Object> UpdateSignIn(@RequestBody User user) {
+
+     try {
+         User signedInUser = userService.signIn(user);
+         
+         if(signedInUser == null) {
+             
+             throw new Error("No user found");
+             
+         }
+ 
+         return new ResponseEntity<>(signedInUser, HttpStatus.OK);
+         
+     } catch(Exception e) {
+         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+     } catch(Error e) {
+         return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+     }
+ }
+ 
+ 
 // @RequestMapping(value = "/purchase/{cartId}",
 //         consumes = MediaType.APPLICATION_JSON_VALUE,
 //         produces = MediaType.APPLICATION_JSON_VALUE,
@@ -276,6 +302,10 @@ public ResponseEntity<Object> deleteById(@PathVariable Integer userId) {
 //     }
 // }
 //
+ 
+ 
+ 
+ 
 
 }
 
