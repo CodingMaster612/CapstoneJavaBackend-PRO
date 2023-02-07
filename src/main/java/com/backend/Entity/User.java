@@ -44,7 +44,11 @@ public class User {
    @OneToMany
    @JoinColumn(name="Bought_id", referencedColumnName = "id")
    List<Cart> BoughtCurrency;
-    
+   
+   
+   @OneToMany
+   @JoinColumn(name="Converted_id", referencedColumnName = "id")
+   List<Cart> convertedAmountBought;
 	
 	public User() {
 		super();
@@ -75,8 +79,30 @@ public class User {
 
 
 
+	public List<Cart> getConvertedAmountBought() {
+		return convertedAmountBought;
+	}
+
+
+
+
+
+	public void setConvertedAmountBought(List<Cart> convertedAmountBought) {
+		this.convertedAmountBought = convertedAmountBought;
+	}
+
+
+
+
+
+	
+
+
+
+
+
 	public User(Integer id, String email, String username, String password, String storedUrl,
-			List<CreditCard> transations, List<Cart> boughtCurrency) {
+			List<CreditCard> transations, List<Cart> boughtCurrency, List<Cart> convertedAmountBought) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -85,6 +111,7 @@ public class User {
 		this.storedUrl = storedUrl;
 		Transations = transations;
 		BoughtCurrency = boughtCurrency;
+		this.convertedAmountBought = convertedAmountBought;
 	}
 
 
@@ -163,8 +190,14 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", username=" + username + ", password=" + password
-				+ ", Transations=" + Transations + ", BoughtCurrency=" + BoughtCurrency + "]";
+				+ ", storedUrl=" + storedUrl + ", Transations=" + Transations + ", BoughtCurrency=" + BoughtCurrency
+				+ ", convertedAmountBought=" + convertedAmountBought + "]";
 	}
+
+
+
+
+
 
 
 	

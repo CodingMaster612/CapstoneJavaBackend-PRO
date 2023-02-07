@@ -144,7 +144,11 @@ public class UserService {
         loggedInUser.getTransations().add(creditcard);
 
         return save(loggedInUser);
+        
+        
     }
+	
+	
 	public User CurrencyTransaction(Integer cartId, Integer Id) {
 
         User loggedInUser = getUserById(Id);
@@ -152,6 +156,18 @@ public class UserService {
        Cart cart = cartService.findCartById(cartId);
 
         loggedInUser.getBoughtCurrency().add(cart);
+
+        return save(loggedInUser);
+    }
+	
+	
+	public User convertedAmountCurrency(Integer cartId, Integer Id ) {
+
+        User loggedInUser = getUserById(Id);
+
+       Cart cart = cartService.findCartById(cartId);
+
+        loggedInUser.getConvertedAmountBought().add(cart);
 
         return save(loggedInUser);
     }

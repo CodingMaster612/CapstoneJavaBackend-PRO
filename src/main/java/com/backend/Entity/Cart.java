@@ -29,6 +29,9 @@ public class Cart {
 	
 	@Column(name="amount")
 	Integer amount;
+	
+	@Column(name="convertedAmount")
+	Double convertedAmount;
 
 	@Column(name="image")
 	String image;
@@ -44,6 +47,23 @@ public class Cart {
 
 
 	
+
+
+
+
+	public Cart(Integer id, String currency, Integer amount, Double convertedAmount, String image) {
+		super();
+		this.id = id;
+		this.currency = currency;
+		this.amount = amount;
+		this.convertedAmount = convertedAmount;
+		this.image = image;
+	}
+
+
+
+
+
 
 
 
@@ -72,13 +92,31 @@ public class Cart {
 
 
 
-	public Cart(Integer id, String currency, Integer amount, String image) {
-		super();
-		this.id = id;
-		this.currency = currency;
-		this.amount = amount;
-		this.image = image;
+	
+
+
+
+
+	public Double getConvertedAmount() {
+		return convertedAmount;
 	}
+
+
+
+
+
+
+
+
+
+	public void setConvertedAmount(Double convertedAmount) {
+		this.convertedAmount = convertedAmount;
+	}
+
+
+
+
+
 
 
 
@@ -132,8 +170,19 @@ public class Cart {
 
 	@Override
 	public String toString() {
-		return "Cart [id=" + id + ", currency=" + currency + ", amount=" + amount + ", image=" + image + "]";
+		return "Cart [id=" + id + ", currency=" + currency + ", amount=" + amount + ", convertedAmount="
+				+ convertedAmount + ", image=" + image + "]";
 	}
+
+
+
+
+
+
+
+
+
+
 
 
 

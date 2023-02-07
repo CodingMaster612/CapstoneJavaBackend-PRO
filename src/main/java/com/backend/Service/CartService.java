@@ -39,8 +39,14 @@ public class CartService {
 	        
 	    }
 
-	
+	 public Cart saveConvertedAmount(Double convertedAmount) {
+
+		 	Cart cart = new Cart();
+		    cart.setConvertedAmount(convertedAmount);
+		    return cartRepo.save(cart);
+		 
+		 
 	 
-	
+	 }
 	
 }
