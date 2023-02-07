@@ -15,6 +15,7 @@ import com.backend.Entity.CreditCard;
 import com.backend.Entity.Currency;
 
 import com.backend.Entity.User;
+import com.backend.Repo.CartRepo;
 import com.backend.Repo.UserRepo;
 
 // This annotates the Class to be a Service bean 
@@ -33,6 +34,9 @@ public class UserService {
     
     @Autowired
     CartService cartService;
+    
+    @Autowired 
+    CartRepo cartRepo;
     
 	public List<User> getAll() {
 		
@@ -161,16 +165,8 @@ public class UserService {
     }
 	
 	
-	public User convertedAmountCurrency(Integer cartId, Integer Id ) {
+	
 
-        User loggedInUser = getUserById(Id);
-
-       Cart cart = cartService.findCartById(cartId);
-
-        loggedInUser.getConvertedAmountBought().add(cart);
-
-        return save(loggedInUser);
-    }
 public User findByEmail(String email) {
 	return userRepo.getByEmail(email);
 }

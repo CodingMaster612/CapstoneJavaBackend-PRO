@@ -2,7 +2,7 @@ package com.backend.Entity;
 
 import java.util.List;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 // Annotate Objects with Entity, lets project know its a Object from the DB
@@ -46,172 +47,117 @@ public class User {
    List<Cart> BoughtCurrency;
    
    
-   @OneToMany
-   @JoinColumn(name="Converted_id", referencedColumnName = "id")
-   List<Cart> convertedAmountBought;
-	
-	public User() {
-		super();
-	}
+   @OneToOne(cascade = CascadeType.ALL)
+   @JoinColumn(name="ConvertedAmount_id", referencedColumnName = "id")
+   private Cart cart;
 
 
-	
+public User() {
+	super();
+	// TODO Auto-generated constructor stub
+}
 
 
-	public List<Cart> getBoughtCurrency() {
-		return BoughtCurrency;
-	}
+public User(Integer id, String email, String username, String password, String storedUrl, List<CreditCard> transations,
+		List<Cart> boughtCurrency, Cart cart) {
+	super();
+	this.id = id;
+	this.email = email;
+	this.username = username;
+	this.password = password;
+	this.storedUrl = storedUrl;
+	Transations = transations;
+	BoughtCurrency = boughtCurrency;
+	this.cart = cart;
+}
 
 
+public Integer getId() {
+	return id;
+}
 
 
+public void setId(Integer id) {
+	this.id = id;
+}
 
-	public void setBoughtCurrency(List<Cart> boughtCurrency) {
-		BoughtCurrency = boughtCurrency;
-	}
 
+public String getEmail() {
+	return email;
+}
 
 
+public void setEmail(String email) {
+	this.email = email;
+}
 
 
+public String getUsername() {
+	return username;
+}
 
 
+public void setUsername(String username) {
+	this.username = username;
+}
 
 
+public String getPassword() {
+	return password;
+}
 
-	public List<Cart> getConvertedAmountBought() {
-		return convertedAmountBought;
-	}
 
+public void setPassword(String password) {
+	this.password = password;
+}
 
 
+public String getStoredUrl() {
+	return storedUrl;
+}
 
 
-	public void setConvertedAmountBought(List<Cart> convertedAmountBought) {
-		this.convertedAmountBought = convertedAmountBought;
-	}
+public void setStoredUrl(String storedUrl) {
+	this.storedUrl = storedUrl;
+}
 
 
+public List<CreditCard> getTransations() {
+	return Transations;
+}
 
 
+public void setTransations(List<CreditCard> transations) {
+	Transations = transations;
+}
 
-	
 
+public List<Cart> getBoughtCurrency() {
+	return BoughtCurrency;
+}
 
 
+public void setBoughtCurrency(List<Cart> boughtCurrency) {
+	BoughtCurrency = boughtCurrency;
+}
 
 
-	public User(Integer id, String email, String username, String password, String storedUrl,
-			List<CreditCard> transations, List<Cart> boughtCurrency, List<Cart> convertedAmountBought) {
-		super();
-		this.id = id;
-		this.email = email;
-		this.username = username;
-		this.password = password;
-		this.storedUrl = storedUrl;
-		Transations = transations;
-		BoughtCurrency = boughtCurrency;
-		this.convertedAmountBought = convertedAmountBought;
-	}
+public Cart getCart() {
+	return cart;
+}
 
 
+public void setCart(Cart cart) {
+	this.cart = cart;
+}
 
 
+@Override
+public String toString() {
+	return "User [id=" + id + ", email=" + email + ", username=" + username + ", password=" + password + ", storedUrl="
+			+ storedUrl + ", Transations=" + Transations + ", BoughtCurrency=" + BoughtCurrency + ", cart=" + cart
+			+ "]";
+}
 
-	public String getStoredUrl() {
-		return storedUrl;
-	}
 
-
-
-
-
-	public void setStoredUrl(String storedUrl) {
-		this.storedUrl = storedUrl;
-	}
-
-
-
-
-
-	public Integer getId() {
-		return id;
-	}
-
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-	public String getUsername() {
-		return username;
-	}
-
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-
-	public String getPassword() {
-		return password;
-	}
-
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-	public List<CreditCard> getTransations() {
-		return Transations;
-	}
-
-
-	public void setTransations(List<CreditCard> transations) {
-		Transations = transations;
-	}
-
-
-
-
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", username=" + username + ", password=" + password
-				+ ", storedUrl=" + storedUrl + ", Transations=" + Transations + ", BoughtCurrency=" + BoughtCurrency
-				+ ", convertedAmountBought=" + convertedAmountBought + "]";
-	}
-
-
-
-
-
-
-
-	
-
-
-
-
-
-	
-
-
-
-	
-
-	
-	
 }

@@ -208,26 +208,7 @@ public class CartRestController {
 	 }
 	 
 	 
-	 @RequestMapping(value = "/convertedAmountCurrency/{Id}",
-	         consumes = MediaType.APPLICATION_JSON_VALUE,
-	         produces = MediaType.APPLICATION_JSON_VALUE,
-	         method = RequestMethod.POST
-	         )
-	 public ResponseEntity<Object> convertedAmountCurrency(@RequestBody Cart cart, @PathVariable Integer Id) {
-
-	     try {
-	    	 Integer CartId = cart.getId();
-	    	 User purchase = userService.convertedAmountCurrency(CartId, Id);
-	         
 	 
-	         return new ResponseEntity<>(purchase, HttpStatus.OK);
-	         
-	     } catch(Exception e) {
-	         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-	     } catch(Error e) {
-	         return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-	     }
-	 }
 	 
 	 
 	 
