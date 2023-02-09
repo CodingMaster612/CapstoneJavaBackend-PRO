@@ -47,9 +47,9 @@ public class User {
    List<Cart> BoughtCurrency;
    
    
-   @OneToOne(cascade = CascadeType.ALL)
-   @JoinColumn(name="ConvertedAmount_id", referencedColumnName = "id")
-   private Cart cart;
+   @OneToMany
+   @JoinColumn(name="converted_id", referencedColumnName = "id")
+   List<Cart> convertedAmount;
 
 
 public User() {
@@ -59,7 +59,7 @@ public User() {
 
 
 public User(Integer id, String email, String username, String password, String storedUrl, List<CreditCard> transations,
-		List<Cart> boughtCurrency, Cart cart) {
+		List<Cart> boughtCurrency, List<Cart> convertedAmount) {
 	super();
 	this.id = id;
 	this.email = email;
@@ -68,7 +68,7 @@ public User(Integer id, String email, String username, String password, String s
 	this.storedUrl = storedUrl;
 	Transations = transations;
 	BoughtCurrency = boughtCurrency;
-	this.cart = cart;
+	this.convertedAmount = convertedAmount;
 }
 
 
@@ -142,22 +142,26 @@ public void setBoughtCurrency(List<Cart> boughtCurrency) {
 }
 
 
-public Cart getCart() {
-	return cart;
+public List<Cart> getConvertedAmount() {
+	return convertedAmount;
 }
 
 
-public void setCart(Cart cart) {
-	this.cart = cart;
+public void setConvertedAmount(List<Cart> convertedAmount) {
+	this.convertedAmount = convertedAmount;
 }
 
 
 @Override
 public String toString() {
 	return "User [id=" + id + ", email=" + email + ", username=" + username + ", password=" + password + ", storedUrl="
-			+ storedUrl + ", Transations=" + Transations + ", BoughtCurrency=" + BoughtCurrency + ", cart=" + cart
-			+ "]";
+			+ storedUrl + ", Transations=" + Transations + ", BoughtCurrency=" + BoughtCurrency + ", convertedAmount="
+			+ convertedAmount + "]";
 }
+
+
+
+
 
 
 }

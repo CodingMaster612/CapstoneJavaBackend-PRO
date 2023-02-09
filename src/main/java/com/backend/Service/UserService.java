@@ -165,6 +165,19 @@ public class UserService {
     }
 	
 	
+	public User MoneyTransaction(Integer cartId, Integer Id) {
+
+        User loggedInUser = getUserById(Id);
+
+       Cart cart = cartService.findCartById(cartId);
+
+        loggedInUser.getConvertedAmount().add(cart);
+
+        return save(loggedInUser);
+    }
+	
+	
+	
 	
 
 public User findByEmail(String email) {

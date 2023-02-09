@@ -190,15 +190,17 @@ public class CartRestController {
 	         produces = MediaType.APPLICATION_JSON_VALUE,
 	         method = RequestMethod.POST
 	         )
-	 public ResponseEntity<Object> addMoneyToCart(@RequestBody Cart cart, @PathVariable Double convertedAmount) {
+	 public ResponseEntity<Object> addMoneyToCart(@RequestBody Cart cart, @PathVariable Integer convertedAmount) {
 
 	     try {
 	    	 
-	    	 Cart purchaseConverted = cartService.saveConvertedAmount(convertedAmount);
+	    	 Integer CartId = cart.getId();
+	    	 
+	    	 User purchase = userService.MoneyTransaction(CartId,convertedAmount);
 	         
 	         
 	 
-	         return new ResponseEntity<>(purchaseConverted, HttpStatus.OK);
+	         return new ResponseEntity<>(purchase, HttpStatus.OK);
 	         
 	     } catch(Exception e) {
 	         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -208,8 +210,8 @@ public class CartRestController {
 	 }
 	 
 	 
-	 
-	 
-	 
-	 
 }
+	 
+	 
+	 
+
